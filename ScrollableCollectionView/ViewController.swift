@@ -13,15 +13,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var myPageControl: UIPageControl!
     
     var newOfferImages  = ["one", "two", "three", "four"]
-    var currentIndex  = 0
     var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myPageControl.currentPage = 0
+        myPageControl.numberOfPages = newOfferImages.count
     }
-
-    
-
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -38,6 +36,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        myPageControl.currentPage = indexPath.row
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
